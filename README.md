@@ -76,18 +76,6 @@ Terraform-AWS-Infrastructure/
 ├── terraform.tfvars
 ├── variables.tf
 ├── screenshots/
-│   ├── architecture.png
-│   ├── ec2-created.png
-│   ├── route-table-created.png
-│   ├── subnet-created.png
-│   ├── terraform-apply-vpc.png
-│   ├── terraform-init.png
-│   ├── terraform-plan-ec2.png
-│   ├── terraform-plan-route-table.png
-│   ├── terraform-plan-subnet.png
-│   ├── terraform-plan-vpc.png
-│   ├── terraform-validate.png
-│   └── vpc-created.png
 ├── provider.tf
 ├── variables.tf
 ├── outputs.tf
