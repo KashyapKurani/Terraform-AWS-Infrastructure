@@ -1,17 +1,29 @@
-🚀 Terraform AWS Infrastructure (VPC → EC2)
-📌 Overview
+# Terraform AWS Infrastructure
 
-This project demonstrates Infrastructure as Code (IaC) using Terraform to provision a complete AWS environment including networking and compute resources.
+## Project Overview
 
-It builds a production-style AWS setup from scratch:
+This project demonstrates Infrastructure as Code (IaC) using Terraform to provision AWS networking resources and an EC2 instance.
 
-VPC
-Public Subnet
-Internet Gateway
-Route Table
-Security Group
-EC2 Instance
-🏗️ Architecture
+The infrastructure includes:
+
+* VPC
+* Public Subnet
+* Internet Gateway
+* Route Table
+* Route Table Association
+* Security Group
+* EC2 Instance
+
+---
+
+### Architecture
+
+![Architecture Diagram](screenshots/architecture.png)
+
+
+### Architecture Flow
+
+```text
 Internet
    │
 Internet Gateway
@@ -21,94 +33,231 @@ Route Table
 Public Subnet
    │
 EC2 Instance
-   │
-Security Group
-⚙️ Tech Stack
-Terraform
-AWS (EC2, VPC, Subnets, IGW, Route Tables, Security Groups)
-AWS CLI
-Linux (Ubuntu)
-Git & GitHub
-📁 Project Structure
+```
+
+---
+
+## Technologies Used
+
+* Terraform
+* AWS EC2
+* AWS VPC
+* AWS Subnets
+* AWS Internet Gateway
+* AWS Route Tables
+* AWS Security Groups
+* AWS CLI
+* Git & GitHub
+
+---
+
+## Infrastructure Created
+
+| Resource         | Purpose                       |
+| ---------------- | ----------------------------- |
+| VPC              | Isolated AWS network          |
+| Public Subnet    | Hosts public resources        |
+| Internet Gateway | Enables internet connectivity |
+| Route Table      | Controls traffic routing      |
+| Security Group   | Firewall rules                |
+| EC2 Instance     | Compute resource              |
+
+---
+
+## Project Structure
+
+```text
 Terraform-AWS-Infrastructure/
-│
-├── provider.tf
-├── variables.tf
+├── .gitignore
+├── README.md
 ├── main.tf
 ├── outputs.tf
+├── provider.tf
 ├── terraform.tfvars
-├── .gitignore
-│
-└── screenshots/
-    ├── terraform-init.png
-    ├── terraform-plan.png
-    ├── terraform-apply.png
-    ├── vpc-created.png
-    ├── subnet-created.png
-    ├── ec2-created.png
-🚀 Features
+├── variables.tf
+├── screenshots/
+│   ├── architecture.png
+│   ├── ec2-created.png
+│   ├── route-table-created.png
+│   ├── subnet-created.png
+│   ├── terraform-apply-vpc.png
+│   ├── terraform-init.png
+│   ├── terraform-plan-ec2.png
+│   ├── terraform-plan-route-table.png
+│   ├── terraform-plan-subnet.png
+│   ├── terraform-plan-vpc.png
+│   ├── terraform-validate.png
+│   └── vpc-created.png
+├── provider.tf
+├── variables.tf
+├── outputs.tf
+└── main.tf
+```
 
-✔ Infrastructure as Code using Terraform
-✔ Modular AWS networking setup
-✔ Public EC2 deployment
-✔ Internet access enabled via IGW
-✔ Security Group with SSH & HTTP access
-✔ Clean variable-driven configuration
+---
 
-🧠 What I Learned
-AWS VPC networking (subnets, routing, IGW)
-Terraform lifecycle (init, plan, apply, destroy)
-State management in Terraform
-Security Groups and inbound/outbound rules
-Infrastructure automation using IaC principles
-🛠️ Setup & Deployment
-1. Clone Repo
-git clone <your-repo-url>
-cd Terraform-AWS-Infrastructure
-2. Initialize Terraform
+## Prerequisites
+
+Install:
+
+* AWS CLI
+* Terraform
+* Git
+
+Verify installation:
+
+```bash
+aws --version
+terraform version
+git --version
+```
+
+Verify AWS credentials:
+
+```bash
+aws sts get-caller-identity
+```
+
+---
+
+## Deployment Steps
+
+### Initialize Terraform
+
+```bash
 terraform init
-3. Validate Configuration
+```
+
+### Validate Configuration
+
+```bash
 terraform validate
-4. Preview Changes
+```
+
+### Format Code
+
+```bash
+terraform fmt
+```
+
+### Review Execution Plan
+
+```bash
 terraform plan
-5. Deploy Infrastructure
+```
+
+### Create Infrastructure
+
+```bash
 terraform apply
+```
 
 Type:
 
+```text
 yes
-6. Destroy Resources (Important)
+```
+
+### View Terraform State
+
+```bash
+terraform state list
+```
+
+### View Outputs
+
+```bash
+terraform output
+```
+
+---
+
+## Screenshots
+
+### Terraform Initialization
+
+![Terraform Init](screenshots/terraform-init.png)
+
+### Terraform Validation
+
+![Terraform Validate](screenshots/terraform-validate.png)
+
+### VPC Created
+
+![VPC Created](screenshots/vpc-created.png)
+
+### Subnet Created
+
+![Subnet Created](screenshots/subnet-created.png)
+
+### Route Table Created
+
+![Route Table](screenshots/route-table-created.png)
+
+### EC2 Creation Plan
+
+![EC2 Plan](screenshots/terraform-plan-ec2.png)
+
+### EC2 Created
+
+![EC2 Created](screenshots/ec2-created.png)
+
+---
+
+## Terraform Commands Used
+
+```bash
+terraform init
+terraform validate
+terraform fmt
+terraform plan
+terraform apply
+terraform output
+terraform state list
 terraform destroy
-📦 Key Terraform Resources Used
-aws_vpc
-aws_subnet
-aws_internet_gateway
-aws_route_table
-aws_route_table_association
-aws_security_group
-aws_instance
-🔐 Security Notes
-SSH is open for learning purposes (0.0.0.0/0)
-In production, restrict SSH access to your IP only
-📸 Screenshots
+```
 
-Add your screenshots in the /screenshots folder:
+---
 
-Terraform Init
-Terraform Plan
-Terraform Apply
-AWS Console (VPC, EC2, Subnet)
-📊 Outputs
+## Learning Outcomes
 
-After deployment:
+Through this project I learned:
 
-EC2 Public IP
-EC2 Public DNS
-Instance ID
-🎯 Outcome
+* Infrastructure as Code (IaC)
+* Terraform resource management
+* AWS networking fundamentals
+* VPC and subnet configuration
+* Internet Gateway and routing
+* Security Group management
+* EC2 provisioning using Terraform
+* Terraform state management
 
-Successfully built a complete AWS infrastructure using Terraform demonstrating real-world DevOps practices.
+---
 
-👨‍💻 Author
+## Cleanup
 
-Kashyap Kurani
+To avoid AWS charges, destroy all resources after testing:
+
+```bash
+terraform destroy
+```
+
+---
+
+## Future Improvements
+
+* Remote Backend (S3)
+* DynamoDB State Locking
+* User Data Scripts
+* Nginx Installation Automation
+* Load Balancer
+* Auto Scaling Group
+* GitHub Actions Integration
+
+---
+
+## Author
+
+**Kashyap Kurani**
+
+DevOps | Cloud Engineering | AWS | Terraform | Docker | CI/CD
